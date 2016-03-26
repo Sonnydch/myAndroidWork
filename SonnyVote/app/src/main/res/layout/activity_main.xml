@@ -1,0 +1,136 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        android:text="所属人群"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="儿童"
+            android:id="@+id/radioButton"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="青年"
+            android:id="@+id/radioButton2"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="老年人"
+            android:id="@+id/radioButton3"
+            android:checked="false" />
+    </RadioGroup>
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="喜爱运动"
+        android:id="@+id/textView"
+        android:layout_below="@+id/radioGroup"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跑步"
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="羽毛球"
+        android:id="@+id/checkBox2"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="篮球"
+        android:id="@+id/checkBox3"
+        android:layout_below="@+id/checkBox2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="足球"
+        android:id="@+id/checkBox4"
+        android:layout_below="@+id/checkBox3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="活动区域"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/checkBox4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="室内"
+        android:id="@+id/checkBox5"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="田径场"
+        android:id="@+id/checkBox6"
+        android:layout_below="@+id/checkBox5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="户外"
+        android:id="@+id/checkBox7"
+        android:layout_below="@+id/checkBox6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+</RelativeLayout>
