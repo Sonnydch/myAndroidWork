@@ -133,4 +133,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:checked="false" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view2"
+        android:text="提 交"
+        app:bootstrapBrand="primary"
+        android:layout_below="@+id/checkBox7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

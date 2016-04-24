@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTest.setText("释放一个toast");
         btnStartActvt.setText("新建一个activity");
         btn002.setText("新建一个可展开item的Activity");
+        btn003.setText("Activity生命周期演示");
+        btn004.setText("tryFlex");
         btnTest.setOnClickListener(this);
         btnStartActvt.setOnClickListener(this);
         btn002.setOnClickListener(this);
@@ -70,6 +72,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_002:
                 Intent intent  = new Intent(MainActivity.this,ListTestActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_003:
+                intent  = new Intent(MainActivity.this,LifeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_004:
+                intent = new Intent(MainActivity.this,TryFlexActivity.class);
                 startActivity(intent);
                 break;
             default:
