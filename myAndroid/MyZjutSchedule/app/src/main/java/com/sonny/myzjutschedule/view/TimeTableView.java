@@ -1,6 +1,8 @@
 package com.sonny.myzjutschedule.view;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -8,15 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marshalchen.common.ui.ToastUtil;
+import com.sonny.myzjutschedule.Global;
 import com.sonny.myzjutschedule.R;
 import com.sonny.myzjutschedule.model.TimeTableModel;
 
-import net.qiujuer.genius.ui.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
+
+import me.drakeet.materialdialog.MaterialDialog;
+import me.yokeyword.fragmentation.Fragmentation;
+
+import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**
  * Created by sonny on 16-4-24.
@@ -49,6 +59,8 @@ public class TimeTableView extends LinearLayout {
     private String[] weekname = {"一", "二", "三", "四", "五", "六", "日"};
     public static String[] colorStr = new String[20];
     int colornum = 0;
+
+    MaterialDialog  mMaterialDialog;
     //数据源
     private List<TimeTableModel> mListTimeTable = new ArrayList<TimeTableModel>();
 
@@ -200,7 +212,15 @@ public class TimeTableView extends LinearLayout {
             mTime.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "星期" + week + "第" + (start + num) + "节", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), Toast.LENGTH_LONG).show();
+                    ToastUtil.showLong(getContext(), "星期" + week + "第" + (start + num) + "节");
+                }
+            });
+            mTime.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                   // Toast.makeText(getContext(), "long星期" + week + "第" + (start + num) + "节", Toast.LENGTH_LONG).show();
+                    return true;
                 }
             });
 
@@ -266,7 +286,38 @@ public class TimeTableView extends LinearLayout {
         mTimeTableView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), model.getName() + "@" + model.getClassroom(), Toast.LENGTH_LONG).show();
+                ToastUtil.showLong(getContext(), model.getName() + "@" + model.getClassroom()+"by"+model.getTeacher());
+            }
+        });
+        mTimeTableView.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+               // Toast.makeText(getContext(),  model.getName() + "long@" + model.getClassroom(), Toast.LENGTH_LONG).show();
+
+                mMaterialDialog =  new MaterialDialog(getContext())
+                        .setTitle("是否删除")
+                        .setMessage(model.getName())
+                        .setPositiveButton("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                SQLiteDatabase myDb = SQLiteDatabase.openOrCreateDatabase("/data/data/com.sonny.myzjutschedule/databases/dchcourses",null);
+                                String[] args = {String.valueOf(model.getId())};
+                                myDb.delete("timetablemodels","id=?",args);
+
+
+                                mMaterialDialog.dismiss();
+
+                            }
+                        })
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+
+                mMaterialDialog.show();
+                return true;
             }
         });
         return mTimeTableView;
@@ -290,6 +341,20 @@ public class TimeTableView extends LinearLayout {
         }
         initView();
         invalidate();
+    }
+
+    protected TimeTableModel makeACourse(Cursor cursor){
+        int  id = cursor.getInt(cursor.getColumnIndex("id"));
+        int startum = cursor.getInt(cursor.getColumnIndex("startnum"));
+        int endnum = cursor.getInt(cursor.getColumnIndex("endnum"));
+        int week = cursor.getInt(cursor.getColumnIndex("week"));
+        String starttime = cursor.getString(cursor.getColumnIndex("starttime"));
+        String endtime = cursor.getString(cursor.getColumnIndex("endtime"));
+        String name = cursor.getString(cursor.getColumnIndex("name"));
+        String teacher = cursor.getString(cursor.getColumnIndex("teacher"));
+        String classroom = cursor.getString(cursor.getColumnIndex("classroom"));
+        String weeknum = cursor.getString(cursor.getColumnIndex("weeknum"));
+        return new TimeTableModel(id,startum,endnum,week,starttime,endtime,name,teacher,classroom,weeknum);
     }
 
     /**

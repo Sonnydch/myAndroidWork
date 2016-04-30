@@ -1,5 +1,7 @@
 package com.sonny.myzjutschedule.model;
 
+import java.util.logging.Handler;
+
 /**
  * Created by sonny on 16-4-24.
  */
@@ -14,7 +16,7 @@ public class TimeTableModel {
     private String teacher="";
     private String classroom="";
     private String weeknum="";
-
+    private Handler mHandler;
     @Override
     public String toString() {
         return "TimeTableModel [id=" + id + ", startnum=" + startnum
